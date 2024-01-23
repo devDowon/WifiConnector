@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.widget.Toast
@@ -90,11 +89,11 @@ class TextExtractor(private val currentContext: Context) {
         "password"
     )
 
-    fun String.containID(): Boolean {
+    private fun String.containID(): Boolean {
         return idList.any { this.contains(it) }
     }
 
-    fun String.substringAfterID(): String {
+    private fun String.substringAfterID(): String {
         for (strId in idList) {
             val substring = this.substringAfter(strId, "")
             if (substring != this) {
@@ -104,11 +103,11 @@ class TextExtractor(private val currentContext: Context) {
         return this
     }
 
-    fun String.containPassword(): Boolean {
+    private fun String.containPassword(): Boolean {
         return passwordList.any { this.contains(it) }
     }
 
-    fun String.substringAfterPassword(): String {
+    private fun String.substringAfterPassword(): String {
         for (strId in passwordList) {
             val substring = this.substringAfter(strId, "")
             if (substring != this) {
