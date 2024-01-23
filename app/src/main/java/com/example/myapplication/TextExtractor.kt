@@ -1,12 +1,7 @@
 package com.example.myapplication
 
-import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
-import android.view.Gravity
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
