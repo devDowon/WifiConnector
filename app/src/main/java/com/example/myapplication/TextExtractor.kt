@@ -20,8 +20,14 @@ class TextExtractor(private val currentContext: Context) {
                 val extractedIdAndPassword = extractIdAndPassword(resultText)
 
                 val wifiConnector = WifiConnector(currentContext)
-                for ((id, password) in extractedIdAndPassword) {
-                    wifiConnector.connectToWifi(id!!, password!!)
+
+                if(extractedIdAndPassword.isEmpty()) {
+                    Toast.makeText(currentContext, "감지된 와이파이 이름이 없습니다", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    for ((id, password) in extractedIdAndPassword) {
+                        wifiConnector.connectToWifi(id!!, password!!)
+                    }
                 }
             }
             .addOnFailureListener { e ->
