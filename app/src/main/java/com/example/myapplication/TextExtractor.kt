@@ -90,12 +90,18 @@ class TextExtractor(private val currentContext: Context) {
 
     private val idList = arrayOf(
         "ID",
-        "id"
+        "id",
+        "네트워크",
+        "아이디"
     )
 
     private val passwordList = arrayOf(
         "PASSWORD",
-        "password"
+        "password",
+        "PW",
+        "pw",
+        "패스워드",
+        "비번"
     )
 
     private fun String.containID(): Boolean {
