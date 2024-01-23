@@ -101,7 +101,8 @@ class TextExtractor(private val currentContext: Context) {
         "PW",
         "pw",
         "패스워드",
-        "비번"
+        "비번",
+        "Pw"
     )
 
     private fun String.containID(): Boolean {
@@ -110,7 +111,7 @@ class TextExtractor(private val currentContext: Context) {
 
     private fun String.substringAfterID(): String {
         for (strId in idList) {
-            val substring = this.substringAfter(strId, "")
+            val substring = this.substringAfter(strId)
             if (substring != this) {
                 return substring
             }
@@ -124,7 +125,7 @@ class TextExtractor(private val currentContext: Context) {
 
     private fun String.substringAfterPassword(): String {
         for (strId in passwordList) {
-            val substring = this.substringAfter(strId, "")
+            val substring = this.substringAfter(strId)
             if (substring != this) {
                 return substring
             }
