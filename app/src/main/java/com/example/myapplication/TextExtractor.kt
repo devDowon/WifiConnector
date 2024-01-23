@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.widget.Toast
@@ -37,12 +38,12 @@ class TextExtractor(private val currentContext: Context) {
         var idIsNextLine = false
         var passwordIsNextLine = false
         for (line in lines) {
-            if (line.uppercase().contains("ID")) {
+            if (line.containID()) {
                 if (idIsNextLine) {
                     currentId = line.trim()
                     idIsNextLine = false
                 } else {
-                    currentId = line.substringAfter("ID").substringAfter(":").trim()
+                    currentId = line.substringAfterID().substringAfter(":").trim()
                 }
 
                 if (line.uppercase().trim() == "ID") {
@@ -50,12 +51,12 @@ class TextExtractor(private val currentContext: Context) {
                 }
             }
 
-            if (line.uppercase().contains("PASSWORD")) {
+            if (line.containPassword()) {
                 if (passwordIsNextLine) {
                     currentPassword = line.trim()
                     passwordIsNextLine = false
                 } else {
-                    currentPassword = line.substringAfter("PASSWORD").substringAfter(":").trim()
+                    currentPassword = line.substringAfterPassword().substringAfter(":").trim()
                 }
 
                 if (line.uppercase().trim() == "PASSWORD") {
@@ -71,5 +72,43 @@ class TextExtractor(private val currentContext: Context) {
         }
 
         return idAndPasswordList
+    }
+
+    private val idList = arrayOf(
+        "ID",
+        "id"
+    )
+
+    private val passwordList = arrayOf(
+        "PASSWORD",
+        "password"
+    )
+
+    fun String.containID(): Boolean {
+        return idList.any { this.contains(it) }
+    }
+
+    fun String.substringAfterID(): String {
+        for (strId in idList) {
+            val substring = this.substringAfter(strId, "")
+            if (substring != this) {
+                return substring
+            }
+        }
+        return this
+    }
+
+    fun String.containPassword(): Boolean {
+        return passwordList.any { this.contains(it) }
+    }
+
+    fun String.substringAfterPassword(): String {
+        for (strId in passwordList) {
+            val substring = this.substringAfter(strId, "")
+            if (substring != this) {
+                return substring
+            }
+        }
+        return this
     }
 }
