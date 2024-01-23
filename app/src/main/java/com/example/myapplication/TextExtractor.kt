@@ -1,7 +1,12 @@
 package com.example.myapplication
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
+import android.view.Gravity
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
@@ -24,8 +29,17 @@ class TextExtractor(private val currentContext: Context) {
                     Toast.makeText(currentContext, "감지된 와이파이 이름이 없습니다", Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    for ((id, password) in extractedIdAndPassword) {
-                        wifiConnector.connectToWifi(id!!, password!!)
+                    val firstPair = extractedIdAndPassword.firstOrNull()
+
+                    if (firstPair != null) {
+                        val (id, password) = firstPair
+
+                        val connectionLogic: (String, String) -> Unit = { enteredId, enteredPassword ->
+                            wifiConnector.connectToWifi(enteredId, enteredPassword)
+                        }
+
+                        val alertDialogBuilder = AlertDialogBuilder(currentContext)
+                        alertDialogBuilder.showAlertDialog(id, password, connectionLogic)
                     }
                 }
             }
