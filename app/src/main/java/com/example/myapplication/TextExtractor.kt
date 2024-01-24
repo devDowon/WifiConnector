@@ -92,7 +92,10 @@ class TextExtractor(private val currentContext: Context) {
         "ID",
         "id",
         "네트워크",
-        "아이디"
+        "아이디",
+        "Wifi",
+        "WIFI",
+        "wifi"
     )
 
     private val passwordList = arrayOf(
